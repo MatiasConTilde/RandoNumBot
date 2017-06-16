@@ -1,0 +1,27 @@
+{
+  "name": "randonumbot",
+  "version": "1.0.0",
+  "description": "This is a Telegram bot for interacting with instapapas",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"¯\\_(ツ)_/¯\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MatiasConTilde/RandoNumBot.git"
+  },
+  "keywords": [
+    "telegram bot",
+    "random number"
+  ],
+  "author": "Matías con tilde",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MatiasConTilde/RandoNumBot/issues"
+  },
+  "homepage": "https://github.com/MatiasConTilde/RandoNumBot#readme",
+  "dependencies": {
+    "node-telegram-bot-api": "^0.27.1"
+  }
+}
