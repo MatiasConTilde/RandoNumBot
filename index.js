@@ -32,7 +32,7 @@ const excute = msg => {
 
   const min = parseInt(msg.substr(0, msg.indexOf(" ")));
   const max = parseInt(msg.substr(msg.indexOf(" ")));
-  return "" + (Math.random() * (max - min)) + min;
+  return "" + ((Math.random() * (max - min)) + min);
 }
 
 const preview = msg => {
