@@ -26,19 +26,42 @@ bot.on("inline_query", msg => {
 });
 
 const excute = msg => {
-  if (/coin/.test(msg)) return "Coin toss: " + (Math.floor(Math.random() * 2) == 0 ? "Heads" : "Tails");
+  const info = msg.substring(msg.indexOf(" ") + 1);
+  if (/^coin/i.test(msg)) {
+    return "Coin toss: " + (Math.floor(Math.random() * 2) == 0 ? "Heads" : "Tails");
+  }
 
-  if (/dice/.test(msg)) return "Dice roll: " + Math.ceil(Math.random() * 6);
+  if (/^dice/i.test(msg)) {
+    return "Dice roll: " + excute("between 1 6 int");
+  }
 
-  const min = parseInt(msg.substr(0, msg.indexOf(" ")));
-  const max = parseInt(msg.substr(msg.indexOf(" ")));
-  return "" + ((Math.random() * (max - min)) + min);
+  if (/^between/i.test(msg)) {
+    const min = parseInt(info.substr(0, info.indexOf(" ")));
+    const max = parseInt(info.substr(info.indexOf(" ")));
+    if (/int/i.test(msg)) return "" + Math.floor((Math.random() * (max + 1 - min)) + min);
+    else return "" + ((Math.random() * (max - min)) + min);
+  }
+
+  if (/^choose/i.test(msg)) {
+    var options = [];
+    var word = "";
+    for (var i = 0; i < info.length; i++) {
+      word += info[i]; // Add next character
+      if (info[i] === " ") {
+        word = word.slice(0, -1); // Remove last space
+        options.push(word);
+        word = "";
+      }
+    }
+    options.push(word); // Add the last option
+    return options[parseInt(excute("between 0 " + options.length + " int"))];
+  }
+  return "hello";
 }
 
 const preview = msg => {
-  if (/coin/.test(msg)) return "Coin toss";
-
-  if (/dice/.test(msg)) return "Dice roll";
-
-  return "Random Number (min max)"
+  if (/^coin/i.test(msg)) return "Coin toss";
+  if (/^dice/i.test(msg)) return "Dice roll";
+  if (/^between/i.test(msg)) return "Random Number (min max)";
+  if (/^choose/i.test(msg)) return "Choose one option";
 }
